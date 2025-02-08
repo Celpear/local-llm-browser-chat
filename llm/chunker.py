@@ -1,7 +1,7 @@
 import os
 import json
 
-CHUNK_SIZE = 100 * 1024 * 1024  # 500 MB
+CHUNK_SIZE = 50 * 1024 * 1024  # 50 MB Max Github free size :D
 
 def chunk_file(input_file, output_dir="chunks"):
     """Splits a binary file into chunks and saves their names in a JSON manifest."""
