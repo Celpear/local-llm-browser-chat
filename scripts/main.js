@@ -41,21 +41,6 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-// Speech Recognition functionality
-window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const SPEECH_RECOGNITION = new window.SpeechRecognition();
-SPEECH_RECOGNITION.continuous = true;
-SPEECH_RECOGNITION.interimResults = true;
-
-// Event listener for speech recognition result
-SPEECH_RECOGNITION.addEventListener('result', function (data) {
-  for (const result of data.results) {
-    if (result.isFinal) {
-      executeAgent(result[0].transcript, CHAT_PERSONA_NAME, CHAT_PERSONA_HISTORY, llmInference, lastGeneratedResponse, CHAT_WINDOW);
-    }
-  }
-});
-
 window.onload = async () => {
   // Load model chunks from the specified JSON file
   const models = await loadModelJson("/llm/chunks/gemma2-2b-it-gpu-int8.bin.json");
