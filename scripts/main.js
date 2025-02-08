@@ -58,14 +58,14 @@ SPEECH_RECOGNITION.addEventListener('result', function (data) {
 
 window.onload = async () => {
   // Load model chunks from the specified JSON file
-  const models = await loadModelJson("llm/chunks/gemma2-2b-it-gpu-int8.bin.json");
+  const models = await loadModelJson("/llm/chunks/gemma2-2b-it-gpu-int8.bin.json");
   await initIndexedDB();
   // Progress callback to update loading status
   const progressCallback = (progress) => {
     if (progress > 99) {
       PRELOADER_MSG.innerText = `Assembling model...`;
     } else {
-      PRELOADER_MSG.innerText = `Model loading: ${progress}%`;
+      PRELOADER_MSG.innerText = `Loading model chunks: ${progress}%`;
     }
   };
 
