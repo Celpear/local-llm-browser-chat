@@ -3,29 +3,29 @@ export function processChunksInWorker(chunkKeys) {
         let worker;
         
         try {
-            // Worker initialisieren
+            // Initialize the worker
             worker = new Worker('/scripts/utils/worker.js');
 
-            // Nachrichtenempfänger für den Worker
+            // Message receiver for the worker
             worker.onmessage = function(event) {
                 if (event.data.status === 'done') {
                     const blobUrl = URL.createObjectURL(event.data.blob);
-                    resolve(blobUrl); // Erfolgreich, Blob-URL zurückgeben
+                    resolve(blobUrl); // Successfully return the Blob URL
                 } else if (event.data.status === 'error') {
-                    reject(event.data.error); // Fehler zurückgeben
+                    reject(event.data.error); // Return error
                 }
             };
 
-            // Fehlerbehandlung für den Worker
+            // Error handling for the worker
             worker.onerror = function(error) {
-                reject(`Fehler im Worker: ${error.message}`);
+                reject(`Worker error: ${error.message}`);
             };
 
-            // Sende die Chunk-Schlüssel an den Worker
+            // Send the chunk keys to the worker
             worker.postMessage({ chunkKeys });
         } catch (error) {
-            // Fehler beim Erstellen des Workers, z. B. wenn die Datei nicht gefunden wird
-            reject(`Fehler beim Erstellen des Workers: ${error.message}`);
+            // Error creating the worker, e.g., if the file is not found
+            reject(`Error creating the worker: ${error.message}`);
         }
     });
 }

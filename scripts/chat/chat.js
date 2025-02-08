@@ -5,17 +5,17 @@ export function addMessageToChatWindow(message, sender, chatWindow) {
     messageElement.classList.add('message');
     messageElement.classList.add(sender === 'user' ? 'userMessage' : 'botMessage');
       
-    // Setze das HTML in das Element
+    // Set the HTML content of the element
     messageElement.innerHTML = marked.parse(message);
   
-    // Füge die Nachricht zum Chatfenster hinzu
+    // Add the message to the chat window
     chatWindow.appendChild(messageElement);
     
-    // Scrolle zum neuesten Eintrag
+    // Scroll to the latest entry
     chatWindow.scrollTop = chatWindow.scrollHeight;
-  }
+}
   
-  export function executeAgent(task, personaName, personaHistory, llmInference, lastGeneratedResponse, chatWindow) {
+export function executeAgent(task, personaName, personaHistory, llmInference, lastGeneratedResponse, chatWindow) {
     if (lastGeneratedResponse === '') {
       personaHistory.push('<start_of_turn>user\n' + task + '<end_of_turn>\n<start_of_turn>model\n');
   
@@ -33,5 +33,4 @@ export function addMessageToChatWindow(message, sender, chatWindow) {
     } else {
       console.warn('Agent is busy!');
     }
-  }
-  
+}
