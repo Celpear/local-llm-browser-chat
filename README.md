@@ -40,6 +40,35 @@ The chatbot loads the model from `indexedDB`. If the model is not yet stored, it
 ### Interaction
 The chatbot allows users to interact with the Gemma2 2B model directly in the browser without the need for a constant internet connection.
 
+## Error Handling in Chunk Loading
+Sometimes, loading a chunk fails. The current error handling is not sufficient, so the temporary solution is to refresh the page a few times until it loads correctly.
+
+### Temporary Workaround
+If a chunk fails to load:
+1. Refresh the page.
+2. Try multiple times if necessary.
+
+### Potential Improvements
+If a new model is used, the IndexedDB must be cleared manually. You can implement an automated way to handle this if desired.
+
+#### Possible Enhancements:
+- Implement a retry mechanism for failed chunk loads.
+- Automatically clear IndexedDB when switching models.
+- Display a user-friendly error message instead of a crash.
+
+```javascript
+// Example: Automatically clear IndexedDB when switching models
+function clearIndexedDB() {
+    if (window.indexedDB) {
+        let databases = indexedDB.databases();
+        databases.then(dbs => {
+            dbs.forEach(db => indexedDB.deleteDatabase(db.name));
+        });
+    }
+}
+Would you like to add automated IndexedDB clearing? Let me know!
+
+
 ## Contributing
 Feel free to fork the repository and submit pull requests with improvements or bug fixes.
 
