@@ -32,6 +32,34 @@ export async function loadBinaryFile(fileUrl, retries = 3, delay = 500, failureC
     }
 }
 
+export async function initIndexedDB() {
+    try {
+        const request = indexedDB.open("BinaryFileDB", 1);
+
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+
+            // Create the "files" object store if it doesn't already exist
+            if (!db.objectStoreNames.contains("files")) {
+                db.createObjectStore("files");
+            }
+        };
+
+        request.onsuccess = () => {
+            console.log("IndexedDB and the 'files' object store have been successfully created/connected.");
+        };
+
+        request.onerror = (event) => {
+            console.error("Error opening IndexedDB:", event.target.error);
+            alert("Error initializing IndexedDB.");
+        };
+    } catch (error) {
+        console.error("Error initializing IndexedDB:", error);
+        alert("Error initializing IndexedDB!");
+    }
+}
+
+
 async function saveToIndexedDB(key, arrayBuffer) {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open("BinaryFileDB", 1);

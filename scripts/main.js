@@ -1,7 +1,7 @@
 import { addMessageToChatWindow, executeAgent } from './chat/chat.js';
+import { initIndexedDB, loadChunks } from './utils/chunks_loader.js';
 
 import { initLLM } from './utils/llmInference.js';
-import { loadChunks } from './utils/chunks_loader.js';
 import { loadModelJson } from './utils/fetchdata.js';
 import { processChunksInWorker } from './utils/model_builder.js';
 
@@ -59,7 +59,7 @@ SPEECH_RECOGNITION.addEventListener('result', function (data) {
 window.onload = async () => {
   // Load model chunks from the specified JSON file
   const models = await loadModelJson("llm/chunks/gemma2-2b-it-gpu-int8.bin.json");
-
+  await initIndexedDB();
   // Progress callback to update loading status
   const progressCallback = (progress) => {
     if (progress > 99) {
