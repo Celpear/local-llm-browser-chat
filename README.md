@@ -1,1 +1,1 @@
-# local-llm-browser-chat
+# local-web-llm

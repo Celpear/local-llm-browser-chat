@@ -1,0 +1,31 @@
+{
+    "original_file": "gemma2-2b-it-gpu-int8.bin",
+    "chunks": [
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk0",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk1",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk2",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk3",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk4",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk5",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk6",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk7",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk8",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk9",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk10",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk11",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk12",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk13",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk14",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk15",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk16",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk17",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk18",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk19",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk20",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk21",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk22",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk23",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk24",
+        "/llm/chunks/gemma2-2b-it-gpu-int8.bin.chunk25"
+    ]
+}

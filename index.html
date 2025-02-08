@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemma2 2B Chat</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <div id="error-gpu">
+    <div id="preloader_sub">You don't have an available GPU in your browser. :(</div>
+  </div>
+  <div id="preloader">
+    <div id="preloader_sub">Downloading model...</div>
+  </div>
+  <div id="chatContainer">
+    <div id="chatHeader">Gemma2 2B Chat</div>
+    <div id="chatWindow"></div>
+    <div id="chatInputArea">
+      <textarea id="chat" placeholder="Ask me anything..."></textarea>
+      <button id="chatBtn">Send</button>
+    </div>
+  </div>
+
+  <script type="module" src="/scripts/main.js"></script>
+</body>
+</html>
