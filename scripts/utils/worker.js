@@ -1,28 +1,28 @@
 self.onmessage = async function(event) {
     const { chunkKeys } = event.data;
     let chunkIndex = 0;
-    let chunks = []; // Array für die einzelnen Blobs
+    let chunks = []; // Array to store individual blobs
 
     async function processNextChunk() {
         if (chunkIndex < chunkKeys.length) {
             try {
-                console.log(`Lade Chunk mit Schlüssel: ${chunkKeys[chunkIndex]}`);
+                console.log(`Loading chunk with key: ${chunkKeys[chunkIndex]}`);
 
                 const chunkBlob = await loadChunkFromIndexedDB(chunkKeys[chunkIndex]);
                 if (chunkBlob) {
-                    chunks.push(chunkBlob); // Speichere den Blob
+                    chunks.push(chunkBlob); // Store the blob
 
                     chunkIndex++;
-                    processNextChunk(); // Nächster Chunk laden
+                    processNextChunk(); // Load the next chunk
                 } else {
-                    self.postMessage({ status: 'error', error: 'Chunk nicht gefunden' });
+                    self.postMessage({ status: 'error', error: 'Chunk not found' });
                 }
             } catch (error) {
-                console.error('Fehler beim Laden des Chunks:', error);
+                console.error('Error loading chunk:', error);
                 self.postMessage({ status: 'error', error: error.message });
             }
         } else {
-            // Alle Chunks sind geladen → Zusammenfügen als ein Blob
+            // All chunks are loaded → Merge them into a single Blob
             const fileBlob = new Blob(chunks);
             self.postMessage({ status: 'done', blob: fileBlob });
         }
@@ -31,16 +31,16 @@ self.onmessage = async function(event) {
     const allKeys = await getAllKeysFromIndexedDB();
     console.log(allKeys);
     
-    // Starte den Prozess
+    // Start the process
     processNextChunk();
 };
 
-// 🔹 IndexedDB: Chunk aus DB laden
+// IndexedDB: Load a chunk from the database
 async function loadChunkFromIndexedDB(key) {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('BinaryFileDB', 1);
 
-        request.onerror = () => reject('Fehler beim Öffnen von IndexedDB');
+        request.onerror = () => reject('Error opening IndexedDB');
 
         request.onsuccess = (event) => {
             const db = event.target.result;
@@ -51,23 +51,23 @@ async function loadChunkFromIndexedDB(key) {
             chunkRequest.onsuccess = (event) => {
                 const result = event.target.result;
                 if (result) {
-                    resolve(new Blob([result])); // Direkt als Blob zurückgeben
+                    resolve(new Blob([result])); // Return directly as a Blob
                 } else {
                     resolve(null);
                 }
             };
 
-            chunkRequest.onerror = () => reject('Fehler beim Abrufen des Chunks');
+            chunkRequest.onerror = () => reject('Error retrieving the chunk');
         };
     });
 }
 
-// 🔹 IndexedDB: Alle verfügbaren Keys abrufen
+// 🔹 IndexedDB: Retrieve all available keys
 async function getAllKeysFromIndexedDB() {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('BinaryFileDB', 1);
 
-        request.onerror = () => reject('Fehler beim Öffnen von IndexedDB');
+        request.onerror = () => reject('Error opening IndexedDB');
 
         request.onsuccess = (event) => {
             const db = event.target.result;
@@ -87,7 +87,7 @@ async function getAllKeysFromIndexedDB() {
                 }
             };
 
-            cursorRequest.onerror = () => reject('Fehler beim Abrufen der Schlüssel');
+            cursorRequest.onerror = () => reject('Error retrieving keys');
         };
     });
 }
