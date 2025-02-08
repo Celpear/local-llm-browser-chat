@@ -66,6 +66,7 @@ function clearIndexedDB() {
         });
     }
 }
+```
 Would you like to add automated IndexedDB clearing? Let me know!
 
 
