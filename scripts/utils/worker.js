@@ -1,5 +1,6 @@
 self.onmessage = async function(event) {
-    const { chunkKeys } = event.data;
+    let { chunkKeys } = event.data;
+    chunkKeys.sort((a, b) => a - b);
     let chunkIndex = 0;
     let chunks = []; // Array to store individual blobs
 
