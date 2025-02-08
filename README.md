@@ -1,5 +1,8 @@
 # local-llm-browser-chat
 
+![Preview](https://raw.githubusercontent.com/Celpear/local-llm-browser-chat/main/assets/img/preview.png)
+
+
 This repository implements a local chatbot using the **Gemma2 2B** model, which stores the model in the browser's `indexedDB` to avoid reloading it each time. The chatbot can be easily started using a local server and interacts with the model stored in the browser.
 
 ## Features
