@@ -127,6 +127,10 @@ body {
     text-align: center;
     font-size: 24px;
   }
+  #preloader_sub_gpu {
+    text-align: center;
+    font-size: 24px;
+  }
   
   .activated {
     background-color: #ff9900;

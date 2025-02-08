@@ -61,41 +61,12 @@ const models = {
     ]
 }
 
-window.onload = async () => {
-  const progressCallback = (progress) => {
-      document.getElementById("preloader_sub").innerText = `Loading progress: ${progress}%`;
-  };
-
-  const failureCallback = (fileUrl, error) => {
-      alert(`Failed to download ${fileUrl}:`);
-      console.error(`Failed to download ${fileUrl}:`, error);
-  };
-
-  //await loadChunks(models, progressCallback, failureCallback);
-
-  const chunkKeys = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
-
-processChunksInWorker(chunkKeys)
-    .then(blobUrl => {
-        console.log("Fertig! Blob-URL:", blobUrl);
-        // Hier kannst du die Blob-URL verwenden, z.B. zum Anzeigen im Browser
-    })
-    .catch(error => {
-        console.error("Fehler:", error);
-    });
-
-
-};
-
-
-
-
-if(false){
-
 const PRELOADER = document.getElementById('preloader');
 const CHAT = document.getElementById('chat');
 const CHAT_BTN = document.getElementById('chatBtn');
 const CHAT_WINDOW = document.getElementById('chatWindow');
+const PRELOADER_MSG = document.getElementById('preloader_sub');
+
 
 let llmInference = undefined;
 let lastGeneratedResponse = '';
@@ -136,9 +107,34 @@ SPEECH_RECOGNITION.addEventListener('result', function (data) {
   }
 });
 
-initLLM(`http://${window.location.host}/llm/gemma2-2b-it-gpu-int8.bin`, PRELOADER)
-//initLLM("https://storage.googleapis.com/jmstore/WebAIDemos/models/Gemma2/gemma2-2b-it-gpu-int8.bin",PRELOADER)
-  .then((llm) => {
-    llmInference = llm;
-  });
-}
+window.onload = async () => {
+  const progressCallback = (progress) => {
+    if(progress > 99){
+      PRELOADER_MSG.innerText = `Assemble model...`;
+    }else{
+      PRELOADER_MSG.innerText = `Model loading: ${progress}%`;
+    }
+  };
+
+  const failureCallback = (fileUrl, error) => {
+      alert(`Failed to download ${fileUrl}:`);
+      console.error(`Failed to download ${fileUrl}:`, error);
+  };
+
+  await loadChunks(models, progressCallback, failureCallback);
+
+  const chunkKeys = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
+
+processChunksInWorker(chunkKeys)
+    .then(blobUrl => {
+        console.log("Assembled model blob-URL:", blobUrl);
+        initLLM(blobUrl, PRELOADER)
+        //initLLM(`http://${window.location.host}/llm/gemma2-2b-it-gpu-int8.bin`, PRELOADER)
+          .then((llm) => {
+            llmInference = llm;
+        });
+    })
+    .catch(error => {
+        console.error("Fehler:", error);
+    });
+};
