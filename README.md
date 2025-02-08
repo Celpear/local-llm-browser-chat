@@ -59,20 +59,6 @@ If a new model is used, the IndexedDB must be cleared manually. You can implemen
 - Automatically clear IndexedDB when switching models.
 - Display a user-friendly error message instead of a crash.
 
-```javascript
-// Example: Automatically clear IndexedDB when switching models
-function clearIndexedDB() {
-    if (window.indexedDB) {
-        let databases = indexedDB.databases();
-        databases.then(dbs => {
-            dbs.forEach(db => indexedDB.deleteDatabase(db.name));
-        });
-    }
-}
-```
-Would you like to add automated IndexedDB clearing? Let me know!
-
-
 ## Contributing
 Feel free to fork the repository and submit pull requests with improvements or bug fixes.
 
